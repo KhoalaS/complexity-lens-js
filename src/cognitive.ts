@@ -74,7 +74,7 @@ function analyzeScript(text: string): ComplexityResult[] {
       results.push({
         name,
         score,
-        start: { line: loc.start.line - 1, column: loc.start.column, },
+        start: { line: loc.start.line - 1, column: loc.start.column },
         end: { line: loc.end.line - 1, column: loc.end.column },
       })
 
@@ -261,7 +261,9 @@ function computeForFunction(
             score += 1 + nesting // each case increases complexity
           }
           // descend into consequent with increased nesting
-          for (const c of switchCase.consequent) walk(c, nesting + 1, false)
+          for (const c of switchCase.consequent) {
+            walk(c, nesting + 1, false)
+          }
         }
         // still walk discriminant (the switch expression) in condition-mode to count boolean ops if present
         if (ss.discriminant) {
