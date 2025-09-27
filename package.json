@@ -27,13 +27,15 @@
     "watch": "tsc -watch -p ./",
     "pretest": "npm run compile && npm run lint",
     "lint": "eslint src",
-    "test": "vscode-test"
+    "test": "vscode-test",
+    "package": "vsce package"
   },
   "dependencies": {
     "@typescript-eslint/parser": "^8.42.0",
     "@typescript-eslint/types": "^8.44.1"
   },
   "devDependencies": {
+    "@vscode/vsce": "3.6.2",
     "@types/mocha": "^10.0.10",
     "@types/node": "22.x",
     "@types/vscode": "^1.104.0",
