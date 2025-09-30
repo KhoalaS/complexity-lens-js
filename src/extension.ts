@@ -35,6 +35,7 @@ export function activate(context: vscode.ExtensionContext) {
   context.subscriptions.push(
     vscode.window.onDidChangeActiveTextEditor((e) => {
       if (e) {
+        runAnalysis(e.document)
         updateStatusBar(e.document.uri)
       }
     })
@@ -106,6 +107,7 @@ function runAnalysis(document: vscode.TextDocument) {
       severity === vscode.DiagnosticSeverity.Error ||
       severity === vscode.DiagnosticSeverity.Warning
     ) {
+      console.log('setting diagnostics')
       const diag = new vscode.Diagnostic(range, message, severity)
       diagnostics.push(diag)
     }
