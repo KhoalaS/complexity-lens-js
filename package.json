@@ -3,6 +3,10 @@
   "displayName": "Complexity Lens",
   "description": "Cognitive Complexity Stats",
   "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KhoalaS/complexity-lens-js.git"
+  },
   "engines": {
     "vscode": "^1.104.0"
   },
