@@ -64,6 +64,16 @@ function analyzeScript(text: string): ComplexityResult[] {
   // traverse AST and collect top-level function-like nodes
   const visit = (node: TSESTree.Node, parents: TSESTree.Node[]) => {
     if (isFunctionNode(node)) {
+      if (
+        node.type === AST_NODE_TYPES.FunctionExpression &&
+        parents.some(
+          (parent) => parent.type === AST_NODE_TYPES.MethodDefinition
+        )
+      ) {
+        // skip to avoid duplicate lens on class methods
+        return
+      }
+
       const score = computeForFunction(node)
       const loc = node.loc
 
