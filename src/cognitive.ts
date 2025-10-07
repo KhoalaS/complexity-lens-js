@@ -14,7 +14,7 @@ function isFunctionNode(
   | TSESTree.FunctionDeclaration
   | TSESTree.FunctionExpression
   | TSESTree.ArrowFunctionExpression
-  | (TSESTree.MethodDefinition & { body?: TSESTree.BlockStatement }) {
+  | TSESTree.MethodDefinition {
   return [
     AST_NODE_TYPES.FunctionDeclaration,
     AST_NODE_TYPES.FunctionExpression,
@@ -183,9 +183,12 @@ function computeForFunction(
     | TSESTree.FunctionDeclaration
     | TSESTree.FunctionExpression
     | TSESTree.ArrowFunctionExpression
-    | (TSESTree.MethodDefinition & { body?: TSESTree.BlockStatement })
+    | TSESTree.MethodDefinition
 ): number {
-  const body = fnNode.body
+  const body =
+    fnNode.type === AST_NODE_TYPES.MethodDefinition
+      ? fnNode.value.body
+      : fnNode.body
   let score = 0
 
   // root function node reference — used to avoid descending into nested functions
